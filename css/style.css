@@ -14,10 +14,6 @@ body {
     padding: 2vh;
 }
 
-.header{
-    margin-bottom: 2vh;
-}
-
 .inputs {
     background-color: #0477BF;
     display: flex;
@@ -34,7 +30,7 @@ body {
 .input-label {
     font-family: 'Montserrat', sans-serif;
     margin: 2rem;
-    font-size: 3vh;
+    font-size: 5vh;
     width: 50rem;
 }
 input {
@@ -58,6 +54,7 @@ input {
 .container .header {
     font-family: 'Montserrat', sans-serif;
     font-size: 2rem;
+    /* margin-bottom: 2vh; */
 }
 #grocery-table {
 
@@ -126,13 +123,35 @@ input {
 }
 
 
-
-@media screen and (max-width:750px) {
-
+@media screen and (max-width:1024px ){
     .inputs {
         flex-flow: row wrap;
         align-content: center;
         justify-content: center;
+    }
+    .input-label {
+        padding:0;
+        margin: 0;
+        font-size: 2rem;
+      }
+}
+
+@media screen and (max-width:750px) {
+
+    .container .header {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      margin-bottom: 1vh;
+    }
+    .inputs {
+        flex-flow: row wrap;
+        align-content: center;
+        justify-content: center;
+    }
+    .input-label {
+      padding:0;
+      margin: 0;
+      font-size: 1rem;
     }
 
     .table {

@@ -19,9 +19,8 @@ const BUILD_FUNCTIONS = {
                     </tr>`
                 },
 
-    'buildSaveAndDeleteActionColumnElement' : (rowId) => `
+    'buildSaveActionColumnElement' : (rowId) => `
                                             <button class="btn fa fa-save" id=${rowId}-btn onclick="saveRow(this.id)" > </button>
-                                            <button class="btn fa fa-trash" id=${rowId}-btn onclick="deleteRow(this.id)" > </button>
                                             `,
 
     'buildEditAndDeleteActionColumnElement' : (rowId) => `
@@ -81,7 +80,6 @@ function addContent() {
 
     // returns HTMLTableSectionElement
     let tableBody = document.getElementById('grocery-table').getElementsByTagName('tbody')[0];
-
     uniqueId += 1;
     let tdElementId = uniqueId;
 
@@ -106,7 +104,7 @@ function addContent() {
     This function 
     * takes the id of the button which calls this function, as an argument
     * sets the attribute (contenteditable) of each 'td' element = true, which makes content editable
-    * swaps the row with same values but replaces edit button with the save button
+    * swaps the row with same values but replaces edit button with the save button and removes delete button
     * updates grand-total value
 */
 
@@ -129,8 +127,8 @@ function editRow(buttonId) {
 
     }
 
-    let saveDeleteActionElementColumn = BUILD_FUNCTIONS.buildSaveAndDeleteActionColumnElement(rowId);
-    let saveButtonString = "<tr> "+textContentOfEachTd[CONSTANTS.NAME_COLUMN]+' '+textContentOfEachTd[CONSTANTS.UNITS_COLUMN]+' '+textContentOfEachTd[CONSTANTS.AMOUNT_COLUMN]+' '+textContentOfEachTd[CONSTANTS.TOTAL_AMOUNT_COLUMN]+' <td>'+saveDeleteActionElementColumn+"</td> </tr>"
+    let saveActionElementColumn = BUILD_FUNCTIONS.buildSaveActionColumnElement(rowId);
+    let saveButtonString = "<tr> "+textContentOfEachTd[CONSTANTS.NAME_COLUMN]+' '+textContentOfEachTd[CONSTANTS.UNITS_COLUMN]+' '+textContentOfEachTd[CONSTANTS.AMOUNT_COLUMN]+' '+textContentOfEachTd[CONSTANTS.TOTAL_AMOUNT_COLUMN]+' <td>'+saveActionElementColumn+"</td> </tr>"
     
     document.getElementById("grocery-table").rows.namedItem(rowId).innerHTML = saveButtonString
 }
@@ -202,6 +200,12 @@ function deleteRow(buttonId) {
 
     deleteGrandTotalRow();
     addGrandTotalRow();
+
+    // Resetting unique id to 0 when no data is in the table:
+    if(document.getElementById('grocery-table').getElementsByTagName('tbody').length === 1 ){
+        uniqueId = 0;
+    }
+    
     
 }
 
@@ -210,10 +214,8 @@ function deleteRow(buttonId) {
     * deletes the grand-total row such that it's value can be updated.
 */
 function deleteGrandTotalRow(){
-
     let row = document.getElementById("grand-total");
     row.parentNode.removeChild(row);
-
 }
 
 /*
