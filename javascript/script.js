@@ -57,6 +57,18 @@ function validInput(nameOfItem, unitsOfItem, amountOfItem) {
     return true;
 }
 
+/**
+ * rowId, buttonId and tdId structure:
+ * rowId = uniqueId
+ * buttonId = uniqueId + '-btn'
+ * tdId = uniqueId + tdIdCounter + '-td'
+ * 
+ * example:
+ * uniqueId = 1
+ *  rowId = 1
+ *  buttonId = 1-btn
+ *  tdIds = [1-1-td, 1-2-td, 1-3-td, 1-4-td. 1-5-td]
+ */
 
 /*  This function 
     * takes the input from the user,
@@ -67,7 +79,7 @@ function validInput(nameOfItem, unitsOfItem, amountOfItem) {
 */
 function addContent() {
     let nameOfItem = document.getElementById('name').value;
-    let unitsOfItem = document.getElementById('units').value;  
+    let unitsOfItem = document.getElementById('units').value  
     let amountOfItem = document.getElementById('amount').value;
 
     let isValid = validInput(nameOfItem, unitsOfItem, amountOfItem)
@@ -75,8 +87,12 @@ function addContent() {
         return;
     }
 
-    let totalAmount = parseFloat(unitsOfItem) * parseFloat(amountOfItem);
-    grandTotal += totalAmount
+    let unitsOfItemWithFixedDecimalPlaces = parseFloat(unitsOfItem).toFixed(2)
+    let amountOfItemWithFixedDecimalPlaces = parseFloat(amountOfItem).toFixed(2)
+
+    // let totalAmount = parseFloat(parseFloat((parseFloat((parseFloat(unitsOfItem)).toFixed(2)) * parseFloat((parseFloat(amountOfItem)).toFixed(2)) ).toFixed(2) ).toFixed(2));
+    let totalAmount = parseFloat((parseFloat(unitsOfItemWithFixedDecimalPlaces) * parseFloat(amountOfItemWithFixedDecimalPlaces)).toFixed(2))
+    grandTotal += totalAmount   
 
     // returns HTMLTableSectionElement
     let tableBody = document.getElementById('grocery-table').getElementsByTagName('tbody')[0];
@@ -121,7 +137,7 @@ function editRow(buttonId) {
             allTdElementsOfRowId[currentTdElement].setAttribute("contenteditable","true")
         }
         else {
-            grandTotal -= parseFloat(allTdElementsOfRowId[currentTdElement].textContent)
+            grandTotal -= parseFloat(parseFloat(allTdElementsOfRowId[currentTdElement].textContent).toFixed(2))
         }
         textContentOfEachTd.push(allTdElementsOfRowId[currentTdElement].outerHTML)
 
@@ -152,8 +168,8 @@ function saveRow(buttonId) {
         textContentOfEachTdElement.push(allTdElementsOfRowId[i])
     }
 
-    let newUnits = parseFloat(textContentOfEachTdElement[1].textContent);
-    let newAmount = parseFloat(textContentOfEachTdElement[2].textContent);
+    let newUnits = parseFloat(parseFloat(textContentOfEachTdElement[1].textContent).toFixed(2));
+    let newAmount = parseFloat(parseFloat(textContentOfEachTdElement[2].textContent).toFixed(2));
 
     if(Number.isNaN(newUnits)|| Number.isNaN(newAmount)) {
         alert('Enter valid data');
@@ -164,7 +180,7 @@ function saveRow(buttonId) {
         allTdElementsOfRowId[i].setAttribute("contenteditable","false")
     }
 
-    let newTotalAmount = newUnits * newAmount;
+    let newTotalAmount = parseFloat((newUnits * newAmount).toFixed(2));
     grandTotal += newTotalAmount
 
     textContentOfEachTdElement[CONSTANTS.TOTAL_AMOUNT_COLUMN].textContent = newTotalAmount.toString()
@@ -226,7 +242,8 @@ function addGrandTotalRow() {
 
     let tableBody = document.getElementById('grocery-table').getElementsByTagName('tbody')[0];
     
-    let grandTotalElementRow = BUILD_FUNCTIONS.buildGrandTotalElementRow(grandTotal)
+    let grandTotalWithFixedDecimalPlaces = parseFloat(grandTotal.toFixed(2))
+    let grandTotalElementRow = BUILD_FUNCTIONS.buildGrandTotalElementRow( grandTotalWithFixedDecimalPlaces<0 ? 0.00 : grandTotalWithFixedDecimalPlaces)
 
     let grandTotalElement = document.createElement('tr');
     grandTotalElement.innerHTML = grandTotalElementRow
