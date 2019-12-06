@@ -50,7 +50,7 @@ function validInput(nameOfItem, unitsOfItem, amountOfItem) {
         return false;
     }
 
-    if(parseInt(unitsOfItem) < 0 || parseFloat(amountOfItem)<0.0) {
+    if(parseFloat(unitsOfItem) < 0 || parseFloat(amountOfItem)<0.0) {
         alert('Enter correct amount');
         return false;
     }
@@ -75,7 +75,7 @@ function addContent() {
         return;
     }
 
-    let totalAmount = parseInt(unitsOfItem) * parseFloat(amountOfItem);
+    let totalAmount = parseFloat(unitsOfItem) * parseFloat(amountOfItem);
     grandTotal += totalAmount
 
     // returns HTMLTableSectionElement
@@ -152,12 +152,12 @@ function saveRow(buttonId) {
         textContentOfEachTdElement.push(allTdElementsOfRowId[i])
     }
 
-    let newUnits = parseInt(textContentOfEachTdElement[1].textContent);
-    let newAmount = parseInt(textContentOfEachTdElement[2].textContent);
+    let newUnits = parseFloat(textContentOfEachTdElement[1].textContent);
+    let newAmount = parseFloat(textContentOfEachTdElement[2].textContent);
 
     if(Number.isNaN(newUnits)|| Number.isNaN(newAmount)) {
         alert('Enter valid data');
-        saveRow();
+        saveRow('');
     }
 
     for(let i=0;i<allTdElementsOfRowId.length-1;i++){
