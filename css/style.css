@@ -1,0 +1,180 @@
+
+body {
+    /* background-color:#F2DCC9; */
+    background-color: rgba(236, 208, 114, 0.781);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4vh;
+    padding: 2vh;
+}
+
+.inputs {
+    background-color: #0477BF;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    width: 80%;
+    border: 1px solid black;
+    border-radius: 1rem;
+}
+
+
+.input-label {
+    font-family: 'Montserrat', sans-serif;
+    margin: 2rem;
+    font-size: 5vh;
+    width: 50rem;
+}
+input {
+    font-size : 1rem;
+    height: 15px;
+    width: 70%;
+    padding: 1rem;
+    margin: 1rem
+}
+
+.inputs button {
+    background-color: white;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    width:40%;
+    font-size: 1rem;
+    border-radius: 1rem;
+    margin-top:2.5rem;
+}
+
+.container .header {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    /* margin-bottom: 2vh; */
+}
+#grocery-table {
+
+    margin-top: 4vh;
+}
+
+#grocery-table thead,tbody  {
+    border-radius: 2rem;
+}
+
+#t-body tr  {
+    background-color: white;
+    color: black;
+}
+
+#grocery-table tbody td {
+    font-family: 'Nanum Gothic', sans-serif;
+    background-color: rgba(248, 58, 0, 0.699);
+    /* width: 100%; */
+    border: 1px solid black;
+    padding: 1rem;
+    margin: 0.5rem;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+#grocery-table thead td {
+    font-family: 'Nanum Gothic', sans-serif;
+    background-color: #6256cc;
+    /* width: 100%; */
+    border : 1px solid black;
+    padding: 1rem;
+    text-align: center;
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
+}
+
+#grocery-table tbody tr button{
+    background-color: #FA754D;
+    font-size: 1.2rem;
+    color: black;
+}
+
+#grocery-table button {
+    background-color:  #F66A3C;
+    border: none;
+    font-size: inherit;
+    cursor: pointer;
+    display: inline;
+}
+
+#grocery-table button:hover {
+    color: white;
+}
+
+
+#grocery-table #t-body #grand-total > .td-not-display {
+    /* color: white; */
+    border: none;
+    background-color: #F0DA90;
+}
+
+#grocery-table #t-body #grand-total {
+    background-color: blue;
+    color: white;
+}
+
+
+@media screen and (max-width:1024px ){
+    .inputs {
+        flex-flow: row wrap;
+        align-content: center;
+        justify-content: center;
+    }
+    .input-label {
+        padding:0;
+        margin: 0;
+        font-size: 2rem;
+      }
+}
+
+@media screen and (max-width:750px) {
+
+    .container .header {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      margin-bottom: 1vh;
+    }
+    .inputs {
+        flex-flow: row wrap;
+        align-content: center;
+        justify-content: center;
+    }
+    .input-label {
+      padding:0;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .table {
+        line-height: 2rem;
+    }
+
+
+    #grocery-table tbody td {
+        border: 1px solid black;
+        padding: 0.2rem;
+        margin: 0.5rem;
+        text-align: center;
+        font-size: 1rem;
+    }
+
+
+    #grocery-table thead td {
+        border : 1px solid black;
+        padding: 0.2rem;
+        text-align: center;
+        font-size: 0.9rem;
+        font-weight: bolder;
+        letter-spacing: initial;
+    }
+
+}
